@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">English Flashcards</string>
+    <string name="about_description">"A flashcard is a card bearing information on both sides, which is intended to be used as an aid in memorization. Each flashcard bears a question on one side and an answer on the other.\n\nTo understand how this works, some sample words have been added.\n\nOnce you get the hang of it, click on the pencil icon (at the top right of the screen) to add your module's words, then click the green checkmark (at the top right of the screen) to save.\n\nOptionally, you may add the name of your current module to distinguish it by clicking on \"Enter Module Name\" at the top of the screen."</string>
+    <string name="front_card_placeholder">(wordType.) Word</string>
+    <string name="back_card_placeholder">Word definition</string>
+    <string name="info_symbol">ⓘ</string>
+    <string name="plus_symbol">+</string>
+    <string name="enter_module_name">Enter Module Name</string>
+    <string name="pencil_symbol">✎</string>
+    <string name="check_symbol">✓</string>
+    <string name="next">Next\n→</string>
+    <string name="previous">Previous\n←</string>
+</resources>

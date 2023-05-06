@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/space_cadet"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="7dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/aboutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:alpha=".5"
+            android:background="@android:color/transparent"
+            android:text="@string/info_symbol"
+            android:textColor="@color/dark_silver"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/moduleNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_silver"
+            android:ems="14"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:hint="@string/enter_module_name"
+            android:inputType="textCapWords|textNoSuggestions"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="@color/light_silver"
+            android:textColorHint="@color/dark_silver"
+            android:textStyle="bold"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/modifyFlashCardsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:alpha=".5"
+            android:background="@android:color/transparent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/pencil_symbol"
+            android:textColor="@color/dark_silver"
+            android:textSize="34sp" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/flashCardCardView"
+        android:layout_width="match_parent"
+        android:layout_height="640dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:padding="0dp"
+        app:cardBackgroundColor="@color/light_silver">
+
+        <TextView
+            android:id="@+id/frontCardTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="@string/front_card_placeholder"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/backCardTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="@string/back_card_placeholder"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="normal"
+            android:visibility="invisible" />
+
+    </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="20dp"
+        android:progress="0"
+        android:progressTint="@color/army_green"
+        android:secondaryProgress="@integer/material_motion_duration_long_1"
+        android:secondaryProgressTint="@color/army_green" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/prevBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3.5dp"
+            android:layout_weight="1.8"
+            android:background="#FF424242"
+            android:fontFamily="monospace"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/previous"
+            android:textColor="@color/dark_silver"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3.5dp"
+            android:layout_weight="1"
+            android:background="@color/dark_green"
+            android:fontFamily="monospace"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/next"
+            android:textColor="@color/dark_silver"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
