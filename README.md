@@ -1,7 +1,7 @@
 # English Flash Cards
 My take on making a flash-cards Android app for elementary students. This is specifically an assignment for my university's Android course. Enjoy!
 
-<img src="https://user-images.githubusercontent.com/89265941/236645175-beb746f3-7b13-4edf-a8fa-0545e02c58d5.png"  width="500" height="375">
+<img src="https://user-images.githubusercontent.com/89265941/236645175-beb746f3-7b13-4edf-a8fa-0545e02c58d5.png"  width="750" height="562.5">
 
 
 <p float="center">
