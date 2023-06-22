@@ -1,6 +1,8 @@
 package data;
 
-public class FlashCard {
+import java.io.Serializable;
+
+public class FlashCard implements Serializable {
     String front;
     String back;
 

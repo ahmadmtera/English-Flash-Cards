@@ -30,7 +30,7 @@
             android:background="@android:color/transparent"
             android:text="@string/info_symbol"
             android:textColor="@color/dark_silver"
-            android:textSize="34sp" />
+            android:textSize="34dp" />
 
         <EditText
             android:id="@+id/moduleNameEditText"
@@ -48,6 +48,22 @@
             android:textColorHint="@color/dark_silver"
             android:textStyle="bold"
             android:autofillHints="" />
+        <Button
+            android:id="@+id/listAllFlashCardsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3.5dp"
+            android:layout_weight="1"
+            android:ems="14"
+            android:background="@color/dark_silver_background"
+            android:fontFamily="monospace"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/list_of_all_flashcards_btn"
+            android:textColor="@color/dark_silver"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/modifyFlashCardsBtn"
@@ -59,7 +75,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:text="@string/pencil_symbol"
             android:textColor="@color/dark_silver"
-            android:textSize="34sp" />
+            android:textSize="34dp" />
 
     </LinearLayout>
 
@@ -133,7 +149,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="3.5dp"
             android:layout_weight="1.8"
-            android:background="#FF424242"
+            android:background="@color/dark_silver_background"
             android:fontFamily="monospace"
             android:foreground="?android:attr/selectableItemBackground"
             android:text="@string/previous"

@@ -9,6 +9,8 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -21,21 +23,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import data.FlashCard;
-import data.FlashCardsDB;
 
 public class MainActivity extends AppCompatActivity {
     MainActivity here = this;
-    ArrayList<FlashCard> flashCardsArrayList;
+    ArrayList<FlashCard> flashCardsArrayList = new ArrayList<>();
     boolean isFront = true;
     boolean editMode = false;
     int currentFlashCardBeingViewed = 0;
     Button aboutBtn;
     AlertDialog.Builder aboutAppAlertDialog;
     EditText moduleNameEditText;
+    Button listAllFlashCardsBtn;
     Button modifyFlashCardsBtn;
     CardView flashCardCardView;
     TextView frontCardTextView;
@@ -53,15 +59,68 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
         bindXMLToJavaReferences();
-        addMockupData();
+        loadSPData();
+        setListeners();
+    }
+
+    private void setListeners() {
         aboutBtnListener();
         modifyFlashCardsBtnListener();
+        viewAllFlashCardsBtnListener();
         flashCardCardViewListener();
         prevBtnListener();
         nextBtnListener();
+    }
+
+    private void viewAllFlashCardsBtnListener() {
+        listAllFlashCardsBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(here, ListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(getString(R.string.MainActivitySPCardsSet), (Serializable) flashCardsArrayList);
+                intent.putExtra(getString(R.string.MainActivitySPCardsSet), bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onStop() {
+        saveDataToSP(this.flashCardsArrayList);
+        super.onStop();
+    }
+
+    /**
+     * Loading data for the UI.
+     */
+    private void loadSPData() {
+        SharedPreferences sp = super.getSharedPreferences(getString(R.string.MainActivitySP), Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sp.getString(getString(R.string.MainActivitySPCardsSet),"");
+        Type type = new TypeToken<ArrayList<FlashCard>>() {}.getType();
+        if (!json.isEmpty()) {
+            ArrayList<FlashCard> flashCards = gson.fromJson(json, type);
+            for (int i = 0; i < flashCards.size(); i++) {
+                addFlashCard(flashCards.get(i));
+            }
+        }
+    }
+
+    /**
+     * Loading data for the UI.
+     */
+    private void saveDataToSP(ArrayList<FlashCard> flashCards) {
+        SharedPreferences sp = super.getSharedPreferences(getString(R.string.MainActivitySP), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(flashCards);
+        editor.putString(getString(R.string.MainActivitySPCardsSet), json);
+        editor.apply();
     }
 
     /**
@@ -175,6 +234,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (editMode) {
                     editMode = false;
+                    listAllFlashCardsBtn.setVisibility(View.GONE);
+                    moduleNameEditText.setVisibility(View.VISIBLE);
                     modifyFlashCardsBtn.setText(R.string.pencil_symbol);
                     modifyFlashCardsBtn.setTextColor(getResources().getColor(R.color.dark_silver));
                     aboutBtn.setText(R.string.info_symbol);
@@ -183,16 +244,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Edit mode disabled.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 editMode = true;
-
+                moduleNameEditText.setVisibility(View.GONE);
+                listAllFlashCardsBtn.setVisibility(View.VISIBLE);
                 aboutBtn.setText(R.string.plus_symbol);
                 aboutBtn.setTextColor(getResources().getColor(R.color.light_green));
                 modifyFlashCardsBtn.setText(R.string.check_symbol);
                 modifyFlashCardsBtn.setTextColor(getResources().getColor(R.color.light_green));
-
                 flashCardCardView.setBackgroundColor(getResources().getColor(R.color.crimson_red));
-
                 Toast.makeText(getApplicationContext(), "Edit mode enabled.", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Hit the green check once you finish making the necessary changes.", Toast.LENGTH_LONG).show();
             }
@@ -307,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
         aboutBtn = findViewById(R.id.aboutBtn);
         aboutAppAlertDialog = new AlertDialog.Builder(this, 0);
         moduleNameEditText = findViewById(R.id.moduleNameEditText);
+        listAllFlashCardsBtn = findViewById(R.id.listAllFlashCardsBtn);
         modifyFlashCardsBtn = findViewById(R.id.modifyFlashCardsBtn);
         flashCardCardView = findViewById(R.id.flashCardCardView);
         frontCardTextView = findViewById(R.id.frontCardTextView);
@@ -314,18 +374,6 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         prevBtn = findViewById(R.id.prevBtn);
         nextBtn = findViewById(R.id.nextBtn);
-    }
-
-    /**
-     * Mockup data for showcasing purposes.
-     *
-     * @return
-     */
-    private void addMockupData() {
-        FlashCardsDB db = new FlashCardsDB();
-        for (int i = 0; i < db.getFlashCardsArrayList().size(); i++) {
-            addFlashCard(db.getFlashCardsArrayList().get(i));
-        }
     }
 
     /**

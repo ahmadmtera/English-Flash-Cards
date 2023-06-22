@@ -10,4 +10,7 @@
     <string name="check_symbol">✓</string>
     <string name="next">Next\n→</string>
     <string name="previous">Previous\n←</string>
+    <string name="MainActivitySP">KLS21RF</string>
+    <string name="MainActivitySPCardsSet">cardsSet</string>
+    <string name="list_of_all_flashcards_btn">List All Flashcards</string>
 </resources>
